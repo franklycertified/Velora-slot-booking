@@ -361,21 +361,6 @@ Includes ₦12,000 cashback, ₦12,500 referral rewards, AI bonuses up to ₦10,
 </div>
 </section>
 
-<!-- FLOATING POPUP -->
-<div class="live-popup" id="livePopup">
-<div class="live-title">💜 Live Earnings</div>
-<div id="popupMessage"></div>
-<div class="live-time" id="popupTime"></div>
-</div>
-
-<script>
-const earnings=[
-"Ade earned ₦50,000 from VELORA",
-"Chioma earned ₦25,000 from Quiz",
-"David earned ₦35,000 from News",
-"Mercy earned ₦18,000 from AI Box"
-];
-
 function showEarning(){
 const msg=earnings[Math.floor(Math.random()*earnings.length)];
 document.getElementById("popupMessage").innerHTML=msg;
