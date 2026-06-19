@@ -191,7 +191,7 @@ text-decoration:none;
 <input type="password" placeholder="Confirm Password" required>
 
 <!-- PLANS -->
-<div class="plan-box" onclick="selectPlan('PLATINUM')">
+<div class="plan-box" onclick="selectPlan('PLATINUM', this)">
 <div class="plan-title">💜 PLATINUM PLAN</div>
 <div>₦9,000 ($4.50)</div>
 <div class="unlock">
@@ -206,7 +206,7 @@ text-decoration:none;
 </div>
 </div>
 
-<div class="plan-box" onclick="selectPlan('GOLD')">
+<div class="plan-box" onclick="selectPlan('GOLD', this)">
 <div class="plan-title">🔥 GOLD PLAN</div>
 <div>₦14,500 ($7.25)</div>
 <div class="unlock">
@@ -237,20 +237,19 @@ Already have an account? <a href="login.html">Login</a>
 
 let selectedPlan = "";
 
-function selectPlan(plan){
+function selectPlan(plan, element){
 selectedPlan = plan;
 
 document.querySelectorAll(".plan-box").forEach(el=>{
 el.classList.remove("locked");
 });
 
-event.currentTarget.classList.add("locked");
+element.classList.add("locked");
 
 document.getElementById("btn").disabled = false;
 document.getElementById("btn").innerText =
 "CONTINUE WITH " + plan;
 }
-
 function registerUser(e){
 e.preventDefault();
 
@@ -262,8 +261,15 @@ return;
 const name = document.getElementById("fullname").value;
 const username = document.getElementById("username").value;
 
+// 👇 ADD THIS HERE
+const email = document.querySelector("input[type='email']").value;
+const phone = document.querySelector("input[type='tel']").value;
+
+// SAVE ALL DATA
 localStorage.setItem("velora_name", name);
 localStorage.setItem("velora_username", username);
+localStorage.setItem("velora_email", email);
+localStorage.setItem("velora_phone", phone);
 localStorage.setItem("velora_plan", selectedPlan);
 
 // BONUS SYSTEM
@@ -275,8 +281,7 @@ localStorage.setItem("velora_bonus", "12000 NGN ($6.00)");
 }
 
 window.location.href = "dashboard.html";
-}
-
+  }
 </script>
 
 </body>
