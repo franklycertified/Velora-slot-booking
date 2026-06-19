@@ -1,159 +1,203 @@
 <script>
 
-/* USER */
+/* =========================
+   USER + PLAN
+========================= */
+
 const user =
 localStorage.getItem("velora_username") ||
 localStorage.getItem("velora_name") ||
 "Member";
 
+const plan = localStorage.getItem("velora_plan") || "PLATINUM";
+
 const userEl = document.getElementById("user");
-if(userEl){
-userEl.innerText = "Hi, " + user + " 👋";
-}
+if (userEl) userEl.innerText = "Hi, " + user + " 👋";
 
-/* BALANCE */
-let naira = 14000;
+/* =========================
+   PLAN BONUS SYSTEM
+========================= */
+
+let bonus = 0;
+
+if (plan === "PLATINUM") bonus = 8000;
+if (plan === "GOLD") bonus = 12000;
+
+/* =========================
+   BALANCE (NGN + USD ONLY)
+========================= */
+
+let naira = 14000 + bonus;
 let usdRate = 1600;
-let showUSD = false;
+let showingUSD = false;
 
-function toggleBalance(){
-let bal = document.getElementById("balance");
-if(!bal) return;
+function toggleBalance() {
+const bal = document.getElementById("balance");
+if (!bal) return;
 
-if(!showUSD){
-bal.innerText = "$" + (naira/usdRate).toFixed(2);
-showUSD = true;
-}else{
+if (!showingUSD) {
+bal.innerText = "$" + (naira / usdRate).toFixed(2);
+showingUSD = true;
+} else {
 bal.innerText = "₦" + naira.toLocaleString();
-showUSD = false;
+showingUSD = false;
 }
 }
 
-/* REF LINK */
+/* =========================
+   REF LINK
+========================= */
+
 const refEl = document.getElementById("ref");
-if(refEl){
-refEl.innerText =
-"velora.app/?ref=" + (localStorage.getItem("velora_username") || "user");
+if (refEl) {
+refEl.innerText = "velora.app/?ref=" + user;
 }
 
-/* SOUND */
+/* =========================
+   SOUND
+========================= */
+
 const sound = new Audio("https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3");
 sound.volume = 1.0;
 
-/* POPUP ELEMENTS SAFE CHECK */
-function safeGet(id){
+/* =========================
+   SAFE ELEMENT GETTER
+========================= */
+
+function el(id) {
 return document.getElementById(id);
 }
 
-/* WELCOME MESSAGE */
-if(!localStorage.getItem("veloraWelcomeShown")){
-setTimeout(()=>{
-const msg = safeGet("msg");
-const time = safeGet("time");
-const popup = safeGet("popup");
+/* =========================
+   WELCOME POPUP
+========================= */
 
-if(msg && time && popup){
+if (!localStorage.getItem("veloraWelcomeShown")) {
+
+setTimeout(() => {
+
+const popup = el("popup");
+const msg = el("msg");
+const time = el("time");
+
+if (popup && msg && time) {
 msg.innerText =
-"💜 Welcome to VELORA! Your account is active. Explore tasks and start earning.";
+"💜 Welcome to VELORA " + plan + " Plan! Start earning with AI tasks, referrals & rewards.";
 
 time.innerText = "Just now";
 popup.style.display = "block";
 
-sound.play().catch(()=>{});
+sound.play().catch(() => {});
 
-setTimeout(()=> popup.style.display = "none", 6000);
+setTimeout(() => popup.style.display = "none", 6000);
 }
 
-localStorage.setItem("veloraWelcomeShown","true");
+localStorage.setItem("veloraWelcomeShown", "true");
 
-},2000);
+}, 2000);
 }
 
-/* 50 EARNINGS */
+/* =========================
+   50+ GLOBAL EARNINGS
+========================= */
+
 const earnings = [
-"💰 You earned ₦2,500 from AI Task",
-"💰 You earned ₦1,800 from Referral Bonus",
-"💰 You earned ₦3,200 from Quiz",
-"💰 You earned ₦4,000 from Engagement",
-"💰 You earned ₦2,100 from Video Task",
 
-"💰 You earned ₦5,500 from Network Bonus",
-"💰 You earned ₦1,200 from Activity Reward",
-"💰 You earned ₦3,800 from Content Task",
-"💰 You earned ₦2,900 from AI Upload",
-"💰 You earned ₦6,000 from Lucky Reward",
+"🇳🇬 Lagos user earned ₦2,500 ($1.56) from AI Quiz Task",
+"🇺🇸 John (USA) earned $3.20 from YouTube Engagement Task",
+"🇬🇧 Emma (UK) earned $2.10 from Referral Bonus Task",
+"🇰🇪 Kevin (Kenya) earned ₦1,800 ($1.12) from WhatsApp Task",
+"🇿🇦 Thabo (South Africa) earned ₦3,000 ($1.87) from Video Watch Task",
 
-"💰 You earned ₦1,500 from Daily Bonus",
-"💰 You earned ₦2,700 from Task Reward",
-"💰 You earned ₦4,300 from Sharing Bonus",
-"💰 You earned ₦3,100 from Engagement",
-"💰 You earned ₦2,600 from Quiz Win",
+"🇳🇬 Aisha (Abuja) earned ₦4,200 ($2.62) from AI Upload Reward",
+"🇬🇭 Kwame (Ghana) earned $2.50 from Football Quiz Task",
+"🇨🇦 Liam (Canada) earned $4.00 from Content Creation Task",
+"🇳🇬 David (Warri) earned ₦3,100 ($1.93) from Referral Bonus",
+"🇮🇳 Priya (India) earned $2.20 from Daily Login Task",
 
-"💰 You earned ₦7,000 from Referral System",
-"💰 You earned ₦1,900 from AI Tools",
-"💰 You earned ₦2,400 from Watching",
-"💰 You earned ₦3,600 from Platform Bonus",
-"💰 You earned ₦5,200 from Rewards",
+"🇺🇸 Michael (USA) earned $5.00 from AI System Bonus",
+"🇳🇬 Blessing (Lagos) earned ₦2,000 ($1.25) from Login Reward",
+"🇿🇦 Zanele (Durban) earned ₦4,500 ($2.81) from Engagement Task",
+"🇬🇧 Oliver (UK) earned $3.00 from Script Task",
+"🇰🇪 Mary (Nairobi) earned ₦1,500 ($0.93) from Social Share Task",
 
-"💰 You earned ₦1,100 from Login Bonus",
-"💰 You earned ₦2,200 from Daily Mission",
-"💰 You earned ₦3,300 from Task Complete",
-"💰 You earned ₦4,400 from Quiz Reward",
-"💰 You earned ₦5,500 from Engagement",
+"🇳🇬 Chinedu (Owerri) earned ₦6,000 ($3.75) from Lucky Draw",
+"🇺🇸 Sarah (USA) earned $6.50 from Weekly Challenge",
+"🇨🇲 Paul (Cameroon) earned ₦2,300 ($1.43) from Quiz Task",
+"🇳🇬 Tolu (Ibadan) earned ₦3,800 ($2.37) from AI Tools Task",
+"🇬🇭 Nana (Accra) earned $2.80 from Video Task",
 
-"💰 You earned ₦2,800 from Social Share",
-"💰 You earned ₦3,900 from AI Creation",
-"💰 You earned ₦6,100 from Referral Bonus",
-"💰 You earned ₦1,600 from Watch Task",
-"💰 You earned ₦2,300 from Activity Bonus",
+"🇳🇬 Emeka (Enugu) earned ₦2,100 ($1.31) from Engagement Bonus",
+"🇺🇸 James (USA) earned $4.10 from YouTube Task",
+"🇿🇦 Lindiwe earned ₦3,600 ($2.25) from Referral Task",
+"🇰🇪 Brian earned ₦1,900 ($1.18) from Daily Mission",
+"🇬🇭 Akosua earned $2.30 from AI Reward Task",
 
-"💰 You earned ₦4,800 from Weekly Challenge",
-"💰 You earned ₦3,700 from Daily Quiz",
-"💰 You earned ₦2,900 from AI Use",
-"💰 You earned ₦5,900 from Platform Bonus",
-"💰 You earned ₦1,300 from Quick Task",
+"🇳🇬 Victor earned ₦5,200 ($3.25) from Content Task",
+"🇺🇸 Daniel earned $7.00 from Shorts Task",
+"🇬🇧 Sophie earned $3.50 from Referral Growth Task",
+"🇰🇪 Faith earned ₦2,600 ($1.62) from Quiz Win Task",
+"🇿🇦 Sipho earned ₦3,900 ($2.43) from Engagement Task",
 
-"💰 You earned ₦2,100 from Content View",
-"💰 You earned ₦3,400 from Engagement",
-"💰 You earned ₦4,900 from Referral Activity",
-"💰 You earned ₦6,300 from Lucky Draw",
-"💰 You earned ₦2,000 from Video Task",
+"🇳🇬 Ngozi earned ₦4,800 ($3.00) from Daily AI Task",
+"🇺🇸 Chris earned $5.50 from Content View Task",
+"🇮🇳 Rahul earned $2.90 from Social Media Task",
+"🇬🇭 Abena earned $3.10 from Referral Bonus Task",
+"🇨🇦 Noah earned $4.40 from Platform Activity Task",
 
-"💰 You earned ₦1,700 from Login Reward",
-"💰 You earned ₦3,000 from Quiz Win",
-"💰 You earned ₦4,200 from Task Bonus",
-"💰 You earned ₦5,800 from AI System",
-"💰 You earned ₦2,600 from Platform Reward",
+"🇳🇬 Femi earned ₦2,700 ($1.68) from Login Reward",
+"🇺🇸 Ethan earned $6.20 from AI Task",
+"🇬🇧 George earned $3.80 from Script Task",
+"🇰🇪 Grace earned ₦1,950 ($1.21) from WhatsApp Task",
+"🇿🇦 Amanda earned ₦4,100 ($2.56) from Engagement Task",
 
-"💰 You earned ₦3,500 from Engagement Bonus",
-"💰 You earned ₦4,700 from Referral Income",
-"💰 You earned ₦6,500 from Weekly Reward",
-"💰 You earned ₦2,900 from AI Task",
-"💰 You earned ₦5,100 from System Bonus"
+"🇳🇬 Chika earned ₦3,300 ($2.06) from Referral Task",
+"🇺🇸 Olivia earned $5.80 from Video Task",
+"🇬🇭 Yaw earned $2.70 from Quiz Task",
+"🇮🇳 Neha earned $2.60 from AI Upload Task",
+"🇨🇲 Esther earned ₦2,400 ($1.50) from Daily Reward",
+
+"🇳🇬 Ibrahim earned ₦5,600 ($3.50) from Lucky Spin",
+"🇺🇸 Mason earned $6.90 from YouTube Task",
+"🇬🇧 Harry earned $4.10 from Referral Task",
+"🇰🇪 John earned ₦2,300 ($1.43) from Engagement Task",
+"🇿🇦 Kelly earned ₦3,700 ($2.31) from AI Reward Task",
+
+"🇳🇬 Peace earned ₦4,300 ($2.68) from Daily Task",
+"🇺🇸 Logan earned $5.30 from Content Task",
+"🇬🇭 Afia earned $3.40 from Social Sharing",
+"🇮🇳 Neha earned $2.60 from Quiz Task",
+"🇨🇦 Emma earned $4.90 from Referral Bonus"
+
 ];
 
-/* POPUP */
-function showPopup(){
+/* =========================
+   POPUP SYSTEM
+========================= */
 
-const msgEl = safeGet("msg");
-const timeEl = safeGet("time");
-const popup = safeGet("popup");
+function showPopup() {
 
-if(!msgEl || !timeEl || !popup) return;
+const msg = el("msg");
+const time = el("time");
+const popup = el("popup");
 
-msgEl.innerText = earnings[Math.floor(Math.random()*earnings.length)];
-timeEl.innerText =
-(Math.floor(Math.random()*30)+1) + " minutes ago";
+if (!msg || !time || !popup) return;
+
+msg.innerText = earnings[Math.floor(Math.random() * earnings.length)];
+
+time.innerText =
+(Math.floor(Math.random() * 30) + 1) + " minutes ago";
 
 popup.style.display = "block";
 
 sound.currentTime = 0;
-sound.play().catch(()=>{});
+sound.play().catch(() => {});
 
-setTimeout(()=> popup.style.display = "none", 5000);
+setTimeout(() => popup.style.display = "none", 5000);
 }
 
-setTimeout(showPopup,4000);
-setInterval(showPopup,8000);
+/* AUTO RUN */
+setTimeout(showPopup, 4000);
+setInterval(showPopup, 8500);
 
 </script>
