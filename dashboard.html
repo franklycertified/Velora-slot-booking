@@ -1,203 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:#0a0014;
+color:white;
+padding:20px;
+}
+
+.header{
+font-size:28px;
+font-weight:800;
+color:#8a2be2;
+}
+
+.card{
+background:#120022;
+padding:18px;
+border-radius:16px;
+margin-top:15px;
+border:1px solid rgba(138,43,226,.25);
+}
+
+.balance{
+font-size:34px;
+font-weight:800;
+margin:10px 0;
+}
+
+.badge{
+display:inline-block;
+padding:5px 12px;
+background:#8a2be2;
+border-radius:20px;
+font-size:12px;
+margin-bottom:10px;
+}
+
+.btn{
+padding:10px 12px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#8a2be2;
+color:white;
+font-weight:700;
+margin:5px;
+}
+
+.btn2{
+background:#1a0a2e;
+border:1px solid #8a2be2;
+}
+
+.module{
+background:#1a0a2e;
+padding:10px;
+border-radius:10px;
+margin-top:8px;
+font-size:13px;
+}
+
+.popup{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#1a0a2e;
+padding:12px;
+border-radius:12px;
+border:1px solid #8a2be2;
+display:none;
+width:280px;
+}
+.small{color:#aaa;font-size:12px}
+</style>
+</head>
+
+<body>
+
+<div class="header">💜 VELORA DASHBOARD</div>
+
+<div class="card">
+<div id="user">Hi Member 👋</div>
+<div class="badge" id="plan">PLAN</div>
+
+<div>Total Balance (Instant Cashback)</div>
+<div class="balance" id="balance">₦0</div>
+
+<button class="btn btn2" onclick="toggleCurrency()">Switch Currency</button>
+</div>
+
+<div class="card">
+<h3>⚡ Activation</h3>
+<p id="activation"></p>
+</div>
+
+<div class="card">
+<h3>💰 EARNING STRUCTURE</h3>
+<div id="modules"></div>
+</div>
+
+<div class="card">
+<h3>🔗 Referral Link</h3>
+<div id="ref"></div>
+</div>
+
+<div class="popup" id="popup">
+<div id="msg"></div>
+</div>
+
 <script>
 
-/* =========================
-   USER + PLAN
-========================= */
+window.onload = function(){
 
-const user =
-localStorage.getItem("velora_username") ||
-localStorage.getItem("velora_name") ||
-"Member";
-
+/* USER */
+const user = localStorage.getItem("velora_username") || "Member";
 const plan = localStorage.getItem("velora_plan") || "PLATINUM";
 
-const userEl = document.getElementById("user");
-if (userEl) userEl.innerText = "Hi, " + user + " 👋";
+document.getElementById("user").innerText = "Hi " + user + " 👋";
+document.getElementById("plan").innerText = plan;
 
-/* =========================
-   PLAN BONUS SYSTEM
-========================= */
+/* PLAN STRUCTURE (YOUR REAL SYSTEM) */
+let balance = (plan === "GOLD") ? 12000 : 8000;
 
-let bonus = 0;
-
-if (plan === "PLATINUM") bonus = 8000;
-if (plan === "GOLD") bonus = 12000;
-
-/* =========================
-   BALANCE (NGN + USD ONLY)
-========================= */
-
-let naira = 14000 + bonus;
+/* CURRENCY */
+let naira = balance;
 let usdRate = 1600;
-let showingUSD = false;
+let showUSD = false;
 
-function toggleBalance() {
 const bal = document.getElementById("balance");
-if (!bal) return;
-
-if (!showingUSD) {
-bal.innerText = "$" + (naira / usdRate).toFixed(2);
-showingUSD = true;
-} else {
 bal.innerText = "₦" + naira.toLocaleString();
-showingUSD = false;
+
+window.toggleCurrency = function(){
+if(!showUSD){
+bal.innerText = "$" + (naira/usdRate).toFixed(2);
+showUSD = true;
+}else{
+bal.innerText = "₦" + naira.toLocaleString();
+showUSD = false;
 }
 }
 
-/* =========================
-   REF LINK
-========================= */
+/* ACTIVATION (REAL FROM YOUR PLAN) */
+document.getElementById("activation").innerText =
+plan === "GOLD"
+? "🔥 Gold Activation Fee: ₦14,500 ($7.25)"
+: "💜 Platinum Activation Fee: ₦9,000 ($4.50)";
 
-const refEl = document.getElementById("ref");
-if (refEl) {
-refEl.innerText = "velora.app/?ref=" + user;
-}
+/* MODULES (FROM YOUR SPEC) */
+const modules = (plan === "GOLD") ? [
 
-/* =========================
-   SOUND
-========================= */
+"💰 Instant Cashback → ₦12,000 ($6.00)",
+"🤝 Direct Referral → ₦12,500 ($6.25)",
+"🌟 Spillover Bonus → ₦400 / ₦100 levels",
+"🤖 AI Rewards → ₦10,000 ($5.00)",
+"⚽ Football Quiz → ₦8,000 ($4.00)",
+"▶️ YouTube Earnings → ₦40,000 ($20.00)",
+"👻 Snapchat Tasks → ₦6,000 ($3.00)",
+"🎁 Active User Bonus → ₦8,000 ($4.00)"
+] : [
 
-const sound = new Audio("https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3");
-sound.volume = 1.0;
-
-/* =========================
-   SAFE ELEMENT GETTER
-========================= */
-
-function el(id) {
-return document.getElementById(id);
-}
-
-/* =========================
-   WELCOME POPUP
-========================= */
-
-if (!localStorage.getItem("veloraWelcomeShown")) {
-
-setTimeout(() => {
-
-const popup = el("popup");
-const msg = el("msg");
-const time = el("time");
-
-if (popup && msg && time) {
-msg.innerText =
-"💜 Welcome to VELORA " + plan + " Plan! Start earning with AI tasks, referrals & rewards.";
-
-time.innerText = "Just now";
-popup.style.display = "block";
-
-sound.play().catch(() => {});
-
-setTimeout(() => popup.style.display = "none", 6000);
-}
-
-localStorage.setItem("veloraWelcomeShown", "true");
-
-}, 2000);
-}
-
-/* =========================
-   50+ GLOBAL EARNINGS
-========================= */
-
-const earnings = [
-
-"🇳🇬 Lagos user earned ₦2,500 ($1.56) from AI Quiz Task",
-"🇺🇸 John (USA) earned $3.20 from YouTube Engagement Task",
-"🇬🇧 Emma (UK) earned $2.10 from Referral Bonus Task",
-"🇰🇪 Kevin (Kenya) earned ₦1,800 ($1.12) from WhatsApp Task",
-"🇿🇦 Thabo (South Africa) earned ₦3,000 ($1.87) from Video Watch Task",
-
-"🇳🇬 Aisha (Abuja) earned ₦4,200 ($2.62) from AI Upload Reward",
-"🇬🇭 Kwame (Ghana) earned $2.50 from Football Quiz Task",
-"🇨🇦 Liam (Canada) earned $4.00 from Content Creation Task",
-"🇳🇬 David (Warri) earned ₦3,100 ($1.93) from Referral Bonus",
-"🇮🇳 Priya (India) earned $2.20 from Daily Login Task",
-
-"🇺🇸 Michael (USA) earned $5.00 from AI System Bonus",
-"🇳🇬 Blessing (Lagos) earned ₦2,000 ($1.25) from Login Reward",
-"🇿🇦 Zanele (Durban) earned ₦4,500 ($2.81) from Engagement Task",
-"🇬🇧 Oliver (UK) earned $3.00 from Script Task",
-"🇰🇪 Mary (Nairobi) earned ₦1,500 ($0.93) from Social Share Task",
-
-"🇳🇬 Chinedu (Owerri) earned ₦6,000 ($3.75) from Lucky Draw",
-"🇺🇸 Sarah (USA) earned $6.50 from Weekly Challenge",
-"🇨🇲 Paul (Cameroon) earned ₦2,300 ($1.43) from Quiz Task",
-"🇳🇬 Tolu (Ibadan) earned ₦3,800 ($2.37) from AI Tools Task",
-"🇬🇭 Nana (Accra) earned $2.80 from Video Task",
-
-"🇳🇬 Emeka (Enugu) earned ₦2,100 ($1.31) from Engagement Bonus",
-"🇺🇸 James (USA) earned $4.10 from YouTube Task",
-"🇿🇦 Lindiwe earned ₦3,600 ($2.25) from Referral Task",
-"🇰🇪 Brian earned ₦1,900 ($1.18) from Daily Mission",
-"🇬🇭 Akosua earned $2.30 from AI Reward Task",
-
-"🇳🇬 Victor earned ₦5,200 ($3.25) from Content Task",
-"🇺🇸 Daniel earned $7.00 from Shorts Task",
-"🇬🇧 Sophie earned $3.50 from Referral Growth Task",
-"🇰🇪 Faith earned ₦2,600 ($1.62) from Quiz Win Task",
-"🇿🇦 Sipho earned ₦3,900 ($2.43) from Engagement Task",
-
-"🇳🇬 Ngozi earned ₦4,800 ($3.00) from Daily AI Task",
-"🇺🇸 Chris earned $5.50 from Content View Task",
-"🇮🇳 Rahul earned $2.90 from Social Media Task",
-"🇬🇭 Abena earned $3.10 from Referral Bonus Task",
-"🇨🇦 Noah earned $4.40 from Platform Activity Task",
-
-"🇳🇬 Femi earned ₦2,700 ($1.68) from Login Reward",
-"🇺🇸 Ethan earned $6.20 from AI Task",
-"🇬🇧 George earned $3.80 from Script Task",
-"🇰🇪 Grace earned ₦1,950 ($1.21) from WhatsApp Task",
-"🇿🇦 Amanda earned ₦4,100 ($2.56) from Engagement Task",
-
-"🇳🇬 Chika earned ₦3,300 ($2.06) from Referral Task",
-"🇺🇸 Olivia earned $5.80 from Video Task",
-"🇬🇭 Yaw earned $2.70 from Quiz Task",
-"🇮🇳 Neha earned $2.60 from AI Upload Task",
-"🇨🇲 Esther earned ₦2,400 ($1.50) from Daily Reward",
-
-"🇳🇬 Ibrahim earned ₦5,600 ($3.50) from Lucky Spin",
-"🇺🇸 Mason earned $6.90 from YouTube Task",
-"🇬🇧 Harry earned $4.10 from Referral Task",
-"🇰🇪 John earned ₦2,300 ($1.43) from Engagement Task",
-"🇿🇦 Kelly earned ₦3,700 ($2.31) from AI Reward Task",
-
-"🇳🇬 Peace earned ₦4,300 ($2.68) from Daily Task",
-"🇺🇸 Logan earned $5.30 from Content Task",
-"🇬🇭 Afia earned $3.40 from Social Sharing",
-"🇮🇳 Neha earned $2.60 from Quiz Task",
-"🇨🇦 Emma earned $4.90 from Referral Bonus"
-
+"💰 Instant Cashback → ₦8,000 ($4.00)",
+"🤝 Direct Referral → ₦7,200 ($3.60)",
+"🌟 Indirect Bonus → ₦300 / ₦100 levels",
+"🤖 AI Rewards → ₦5,000 ($2.50)",
+"⚽ Football Quiz → ₦4,000 ($2.00)",
+"▶️ YouTube Earnings → ₦20,000 ($10.00)",
+"👻 Snapchat Tasks → ₦1,000 ($0.50)",
+"🎁 Active User Bonus → ₦1,000 ($0.50)"
 ];
 
-/* =========================
-   POPUP SYSTEM
-========================= */
+document.getElementById("modules").innerHTML =
+modules.map(m => "<div class='module'>"+m+"</div>").join("");
 
-function showPopup() {
+/* REF */
+document.getElementById("ref").innerText =
+"velora.app/?ref=" + user;
 
-const msg = el("msg");
-const time = el("time");
-const popup = el("popup");
+/* 70+ GLOBAL POPUPS */
+const countries = ["Nigeria","USA","UK","Kenya","Ghana","India","Canada","Brazil","UAE"];
+const tasks = ["AI Task","YouTube","Quiz","Referral","Snapchat","Spillover","Engagement"];
 
-if (!msg || !time || !popup) return;
+function popup(){
+const currency = Math.random() > 0.5 ? "₦" : "$";
+const amount = Math.floor(Math.random()*7000)+500;
+const country = countries[Math.floor(Math.random()*countries.length)];
+const task = tasks[Math.floor(Math.random()*tasks.length)];
 
-msg.innerText = earnings[Math.floor(Math.random() * earnings.length)];
+document.getElementById("msg").innerText =
+"👤 " + country + " user earned " + currency + amount + " from " + task;
 
-time.innerText =
-(Math.floor(Math.random() * 30) + 1) + " minutes ago";
+document.getElementById("popup").style.display = "block";
 
-popup.style.display = "block";
-
-sound.currentTime = 0;
-sound.play().catch(() => {});
-
-setTimeout(() => popup.style.display = "none", 5000);
+setTimeout(()=>{
+document.getElementById("popup").style.display = "none";
+},4000);
 }
 
-/* AUTO RUN */
-setTimeout(showPopup, 4000);
-setInterval(showPopup, 8500);
+setInterval(popup,6000);
+popup();
 
+};
 </script>
+
+</body>
+</html>
