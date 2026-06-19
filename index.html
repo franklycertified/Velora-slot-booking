@@ -542,14 +542,28 @@ Once activated, you gain full access to all earning modules including AI tools, 
 </div>
 </section>
 
-<!-- FLOATING POPUP -->
-<div class="live-popup" id="livePopup">
-<div class="live-title">💜 Live Earnings</div>
-<div id="popupMessage"></div>
-<div class="live-time" id="popupTime"></div>
-</div>
+.live-popup{
+position:fixed;
+left:20px;
+bottom:20px;
+width:320px;
+background:linear-gradient(135deg,#1a0a2e,#120022);
+border:1px solid rgba(138,43,226,.4);
+border-radius:18px;
+padding:15px;
+z-index:99999;
+display:none;
+box-shadow:0 0 25px rgba(138,43,226,.4);
+animation:slideUp .5s ease;
+}
 
 <script>
+<!-- FLOATING POPUP --><div class="live-popup" id="livePopup">
+    <div class="live-title">💜 Live Earnings</div>
+    <div id="popupMessage"></div>
+    <div class="live-time" id="popupTime"></div>
+</div><script>
+
 const earnings = [
 "Ade earned ₦50,000 from VELORA",
 "Chioma earned ₦25,000 from Football Quiz",
@@ -561,7 +575,6 @@ const earnings = [
 "Grace earned ₦15,000 from Opinion Rewards",
 "Amina earned ₦22,000 from Fan Battle Zone",
 "Michael earned ₦60,000 from Gold Plan",
-
 "Sarah earned ₦28,000 from AI Upload Rewards",
 "Chinedu earned ₦45,000 from YouTube Tasks",
 "Esther earned ₦12,000 from News Rewards",
@@ -572,7 +585,6 @@ const earnings = [
 "John earned ₦50,000 from VELORA Earnings",
 "Mary earned ₦14,000 from Opinion Rewards",
 "Kelvin earned ₦32,000 from Fan Battle Zone",
-
 "Janet earned ₦38,000 from AI Video Sales",
 "Henry earned ₦26,000 from News Rewards",
 "Joy earned ₦18,000 from YouTube Engagement",
@@ -583,7 +595,6 @@ const earnings = [
 "Rebecca earned ₦16,000 from WhatsApp Rewards",
 "Joseph earned ₦29,000 from Opinion Rewards",
 "Ruth earned ₦54,000 from YouTube Earnings",
-
 "Paul earned ₦27,000 from AI Lucky Box",
 "Vivian earned ₦33,000 from Fan Battle Zone",
 "Moses earned ₦21,000 from News Rewards",
@@ -594,7 +605,6 @@ const earnings = [
 "Kennedy earned ₦20,000 from Opinion Rewards",
 "Angela earned ₦44,000 from YouTube Growth",
 "Godwin earned ₦19,000 from AI Uploads",
-
 "Benjamin earned ₦62,000 from Gold Plan",
 "Lilian earned ₦24,000 from News Rewards",
 "Stephen earned ₦37,000 from Referral Income",
@@ -607,6 +617,42 @@ const earnings = [
 "Jessica earned ₦46,000 from VELORA Tasks"
 ];
 
+function showEarning() {
+
+const popup = document.getElementById("livePopup");
+const message = document.getElementById("popupMessage");
+const time = document.getElementById("popupTime");
+
+if (!popup || !message || !time) return;
+
+const randomMessage =
+earnings[Math.floor(Math.random() * earnings.length)];
+
+const randomMinutes =
+Math.floor(Math.random() * 30) + 1;
+
+message.innerHTML = randomMessage;
+time.innerHTML = randomMinutes + " minutes ago";
+
+popup.style.display = "block";
+
+setTimeout(function () {
+popup.style.display = "none";
+}, 5000);
+
+}
+
+window.addEventListener("load", function () {
+
+setTimeout(showEarning, 3000);
+
+setInterval(function () {
+showEarning();
+}, 9000);
+
+});
+
+</script>
 function showEarning(){
 const msg=earnings[Math.floor(Math.random()*earnings.length)];
 document.getElementById("popupMessage").innerHTML=msg;
