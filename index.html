@@ -411,105 +411,108 @@ setInterval(showEarning,9000);
 <h3>💜 VELORA AI ACADEMY</h3>  
 <p>Learn AI. Create AI. Earn from AI.</p>  <p>WhatsApp Support: +2348161380755</p>  <p>© 2026 VELORA AI ACADEMY. All Rights Reserved.</p>  
 </footer>
-<!-- FLOATING POPUP -->
+<!-- ===== VELORA ACTIVITY POPUP ===== -->
 <div class="live-popup" id="livePopup">
-<div class="live-title">💜 Live Earnings</div>
-<div id="popupMessage"></div>
-<div class="live-time" id="popupTime"></div>
+  <div class="live-title">💜 VELORA ACTIVITY FEED</div>
+  <div id="popupMessage"></div>
+  <div class="live-time" id="popupTime"></div>
 </div>
 
-<!-- SOUND -->
-<audio id="cashSound" src="https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3" preload="auto"></audio>
+<!-- ===== SOUND ===== -->
+<audio id="cashSound" preload="auto">
+  <source src="https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-const earnings = [
-"Ade earned ₦50,000 from VELORA",
-"Chioma earned ₦25,000 from Football Quiz",
-"David earned ₦35,000 from News Rewards",
-"Mercy earned ₦18,000 from AI Lucky Box",
-"Kingsley earned ₦40,000 from YouTube Earnings",
-"Jennifer earned ₦55,000 from WhatsApp Rewards",
-"Emmanuel earned ₦30,000 from Referrals",
-"Grace earned ₦15,000 from Opinion Rewards",
-"Amina earned ₦22,000 from Fan Battle Zone",
-"Michael earned ₦60,000 from Gold Plan",
-"Sarah earned ₦28,000 from AI Upload Rewards",
-"Chinedu earned ₦45,000 from YouTube Tasks",
-"Esther earned ₦12,000 from News Rewards",
-"Blessing earned ₦20,000 from Football Quiz",
-"Daniel earned ₦70,000 from Direct Referrals",
-"Victor earned ₦25,000 from WhatsApp Tasks",
-"Precious earned ₦17,000 from AI Lucky Box",
-"John earned ₦50,000 from VELORA Earnings",
-"Mary earned ₦14,000 from Opinion Rewards",
-"Kelvin earned ₦32,000 from Fan Battle Zone",
-"Janet earned ₦38,000 from AI Video Sales",
-"Henry earned ₦26,000 from News Rewards",
-"Joy earned ₦18,000 from YouTube Engagement",
-"Patricia earned ₦40,000 from Referral Bonuses",
-"Samuel earned ₦22,000 from Football Quiz",
-"Faith earned ₦35,000 from AI Upload Rewards",
-"Ibrahim earned ₦48,000 from Gold Plan",
-"Rebecca earned ₦16,000 from WhatsApp Rewards",
-"Joseph earned ₦29,000 from Opinion Rewards",
-"Ruth earned ₦54,000 from YouTube Earnings",
-"Paul earned ₦27,000 from AI Lucky Box",
-"Vivian earned ₦33,000 from Fan Battle Zone",
-"Moses earned ₦21,000 from News Rewards",
-"Gloria earned ₦58,000 from Referrals",
-"Favour earned ₦13,000 from Football Quiz",
-"Collins earned ₦31,000 from WhatsApp Tasks",
-"Deborah earned ₦47,000 from AI Videos",
-"Kennedy earned ₦20,000 from Opinion Rewards",
-"Angela earned ₦44,000 from YouTube Growth",
-"Godwin earned ₦19,000 from AI Uploads",
-"Benjamin earned ₦62,000 from Gold Plan",
-"Lilian earned ₦24,000 from News Rewards",
-"Stephen earned ₦37,000 from Referral Income",
-"Ngozi earned ₦15,000 from AI Lucky Box",
-"Frank earned ₦41,000 from WhatsApp Rewards",
-"Rose earned ₦23,000 from Football Quiz",
-"Isaac earned ₦52,000 from YouTube Earnings",
-"Comfort earned ₦28,000 from Fan Battle Zone",
-"Andrew earned ₦34,000 from AI Rewards",
-"Jessica earned ₦46,000 from VELORA Tasks"
+const messages = [
+"Ade from Lagos, Nigeria just joined VELORA",
+"Chinedu from Abuja, Nigeria activated account",
+"Maria from Nairobi, Kenya registered",
+"John from London, UK joined VELORA",
+"Fatima from Kano, Nigeria activated account",
+"David from Accra, Ghana signed up",
+"Aisha from Lagos, Nigeria joined VELORA",
+"Emmanuel from Port Harcourt, Nigeria activated account",
+"Grace from Toronto, Canada registered",
+"Samuel from Texas, USA joined",
+"Blessing from Ogun, Nigeria activated",
+"Ahmed from Cairo, Egypt joined VELORA",
+"Peter from Berlin, Germany registered",
+"Sarah from Cape Town, South Africa activated",
+"Michael from Dubai, UAE joined",
+"Esther from Enugu, Nigeria signed up",
+"Ibrahim from Sokoto, Nigeria activated account",
+"Joy from Ibadan, Nigeria joined VELORA",
+"Daniel from Paris, France registered",
+"Jennifer from Nairobi, Kenya activated account",
+"Victor from Lagos, Nigeria joined",
+"Linda from Manchester, UK signed up",
+"Isaac from Ghana activated account",
+"Rose from Abuja, Nigeria joined",
+"Paul from USA registered",
+"Kelvin from Lagos, Nigeria joined",
+"Zainab from Morocco registered",
+"Henry from Canada activated",
+"Nathan from Kenya joined",
+"Uche from Nigeria activated account",
+"Mercy from Lagos, Nigeria registered",
+"Ali from Saudi Arabia joined",
+"Faith from Abuja, Nigeria activated account",
+"Prince from Ghana registered",
+"Victoria from UK joined",
+"Samuel from USA activated",
+"Angela from Nigeria registered",
+"Bright from Lagos, Nigeria joined",
+"Rebecca from Kenya activated account",
+"Godwin from Port Harcourt, Nigeria registered",
+"Janet from Canada joined",
+"Stephen from Egypt activated account",
+"Mary from UK registered",
+"Joshua from Ghana joined",
+"Chioma from Nigeria activated account",
+"Daniel from USA registered",
+"Favour from Lagos, Nigeria joined",
+"Michael from Kenya activated account",
+"Esther from UK registered"
 ];
 
-function showEarning() {
-  const popup = document.getElementById("livePopup");
-  const message = document.getElementById("popupMessage");
-  const time = document.getElementById("popupTime");
-  const sound = document.getElementById("cashSound");
+function showPopup(){
+const popup=document.getElementById("livePopup");
+const msg=document.getElementById("popupMessage");
+const time=document.getElementById("popupTime");
+const sound=document.getElementById("cashSound");
 
-  if (!popup || !message || !time) return;
+const randomMsg=messages[Math.floor(Math.random()*messages.length)];
+const randomTime=Math.floor(Math.random()*30)+1;
 
-  const randomMessage = earnings[Math.floor(Math.random() * earnings.length)];
-  const randomMinutes = Math.floor(Math.random() * 30) + 1;
+msg.innerHTML=randomMsg;
+time.innerHTML=randomTime+" minutes ago";
 
-  message.innerHTML = randomMessage;
-  time.innerHTML = randomMinutes + " minutes ago";
+popup.style.display="block";
 
-  popup.style.display = "block";
+/* 🔊 STRONG SOUND FIX */
+if(sound){
+sound.volume = 1.0;
+sound.currentTime = 0;
 
-  // SOUND
-  if (sound) {
-    sound.currentTime = 0;
-    sound.play().catch(() => {});
-  }
-
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 5000);
+sound.play().catch(()=>{
+document.body.addEventListener("click",()=>{
+sound.play();
+},{once:true});
+});
 }
 
-window.addEventListener("load", function () {
-  setTimeout(showEarning, 3000);
-  setInterval(showEarning, 9000);
+setTimeout(()=>{
+popup.style.display="none";
+},5000);
+}
+
+/* AUTO START SYSTEM */
+window.addEventListener("load",()=>{
+setTimeout(showPopup,3000);
+setInterval(showPopup,7000);
 });
 </script>
-
-</body>
-</html>
     
 </body>
     </html>
