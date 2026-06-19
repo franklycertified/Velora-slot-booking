@@ -1,1 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA Registration</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0a0014;
+padding:20px;
+color:white;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:#120022;
+padding:35px;
+border-radius:20px;
+border:1px solid rgba(138,43,226,.25);
+}
+
+.logo{
+text-align:center;
+font-size:32px;
+font-weight:800;
+color:#8a2be2;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:none;
+border-radius:10px;
+background:#1d1d1d;
+color:white;
+font-size:15px;
+}
+
+.plan-box{
+background:#1a0a2e;
+padding:20px;
+border-radius:15px;
+margin-bottom:15px;
+border:2px solid transparent;
+cursor:pointer;
+transition:0.3s;
+}
+
+.plan-box:hover{
+border-color:#8a2be2;
+}
+
+.plan-box.active{
+border-color:#8a2be2;
+box-shadow:0 0 20px rgba(138,43,226,.4);
+}
+
+.plan-title{
+font-weight:700;
+color:#8a2be2;
+margin-bottom:8px;
+}
+
+.price{
+font-size:20px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.lock-note{
+margin-top:20px;
+padding:15px;
+border-radius:12px;
+background:linear-gradient(135deg,#1a0a2e,#0a0014);
+border:1px solid rgba(138,43,226,.3);
+color:#ccc;
+font-size:13px;
+line-height:1.6;
+}
+
+.lock-note span{
+color:#8a2be2;
+font-weight:700;
+}
+
+button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:50px;
+background:#8a2be2;
+color:white;
+font-weight:700;
+font-size:16px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.login-link{
+text-align:center;
+margin-top:20px;
+}
+
+.login-link a{
+color:#8a2be2;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">💜 VELORA REGISTRATION</div>
+
+<form onsubmit="registerUser(event)">
+
+<input type="text" id="fullname" placeholder="Full Name" required>
+<input type="text" id="username" placeholder="Username" required>
+<input type="email" placeholder="Email Address" required>
+<input type="tel" placeholder="Phone Number" required>
+
+<select required>
+<option>Select Country</option>
+<option>Nigeria</option>
+<option>Ghana</option>
+<option>Kenya</option>
+<option>South Africa</option>
+<option>Uganda</option>
+<option>Cameroon</option>
+<option>Other</option>
+</select>
+
+<input type="password" placeholder="Password" required>
+
+<!-- PLANS -->
+<div class="plan-box" onclick="selectPlan('PLATINUM', 8000, 4)">
+<div class="plan-title">💜 PLATINUM PLAN</div>
+<div class="price">₦9,000 ($4.50)</div>
+<p>Instant bonus ₦8,000 ($4.00)</p>
+</div>
+
+<div class="plan-box" onclick="selectPlan('GOLD', 12000, 6)">
+<div class="plan-title">🔥 GOLD PLAN</div>
+<div class="price">₦14,500 ($7.25)</div>
+<p>Instant bonus ₦12,000 ($6.00)</p>
+</div>
+
+<!-- LOCK MESSAGE -->
+<div class="lock-note">
+<span>NOTE:</span> Once you select a plan and continue, your plan becomes locked and cannot be changed.  
+This ensures secure activation and proper bonus allocation inside your dashboard system.
+</div>
+
+<button type="submit">CREATE ACCOUNT</button>
+
+</form>
+
+<div class="login-link">
+Already have an account? <a href="login.html">Login</a>
+</div>
+
+</div>
+
+<script>
+let selectedPlanData = {};
+let locked = false;
+
+function selectPlan(plan, naira, dollar){
+
+if(locked) return;
+
+selectedPlanData = {
+plan: plan,
+nairaBonus: naira,
+dollarBonus: dollar
+};
+
+document.querySelectorAll(".plan-box").forEach(box=>{
+box.classList.remove("active");
+});
+
+event.target.closest(".plan-box").classList.add("active");
+}
+
+function registerUser(e){
+e.preventDefault();
+
+if(!selectedPlanData.plan){
+alert("Please select a plan");
+return;
+}
+
+locked = true;
+
+localStorage.setItem("veloraUser", document.getElementById("fullname").value);
+localStorage.setItem("veloraUsername", document.getElementById("username").value);
+
+localStorage.setItem("veloraPlan", selectedPlanData.plan);
+localStorage.setItem("veloraBonusNaira", selectedPlanData.nairaBonus);
+localStorage.setItem("veloraBonusDollar", selectedPlanData.dollarBonus);
+
+window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+  </html>
