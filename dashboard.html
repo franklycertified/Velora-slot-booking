@@ -1,1 +1,147 @@
+<script>
 
+/* USER */
+const user = localStorage.getItem("veloraUser");
+
+if(user){
+document.getElementById("user").innerText = "Hi, " + user + " 👋";
+}
+
+/* BALANCE */
+let naira = 14000;
+let usdRate = 1600;
+let showUSD = false;
+
+function toggleBalance(){
+let bal = document.getElementById("balance");
+
+if(!showUSD){
+bal.innerText = "$" + (naira/usdRate).toFixed(2);
+showUSD = true;
+}else{
+bal.innerText = "₦" + naira.toLocaleString();
+showUSD = false;
+}
+}
+
+/* REF */
+const ref = localStorage.getItem("veloraUser");
+if(ref){
+document.getElementById("ref").innerText = "velora.app/?ref=" + ref;
+}
+
+/* ===== SOUND ===== */
+const sound = new Audio("https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3");
+sound.volume = 1.0;
+
+/* ===== WELCOME MESSAGE (FIRST TIME ONLY) ===== */
+if(!localStorage.getItem("veloraWelcomeShown")){
+setTimeout(()=>{
+document.getElementById("msg").innerText =
+"💜 Welcome to VELORA! Your account has been created successfully. You are now part of a global AI earning community. Start exploring and earning today.";
+
+document.getElementById("time").innerText = "Just now";
+
+document.getElementById("popup").style.display = "block";
+
+sound.play().catch(()=>{});
+
+setTimeout(()=>{
+document.getElementById("popup").style.display = "none";
+},6000);
+
+localStorage.setItem("veloraWelcomeShown","true");
+
+},2000);
+}
+
+/* ===== 50 EARNING POPUPS ONLY ===== */
+const earnings = [
+"💰 You earned ₦2,500 from AI Video Task",
+"💰 You earned ₦1,800 from WhatsApp Sharing",
+"💰 You earned ₦3,200 from Football Quiz",
+"💰 You earned ₦4,000 from YouTube Engagement",
+"💰 You earned ₦2,100 from News Reading Task",
+
+"💰 You earned ₦5,500 from Referral Bonus",
+"💰 You earned ₦1,200 from Opinion Reward",
+"💰 You earned ₦3,800 from Fan Battle Zone",
+"💰 You earned ₦2,900 from AI Upload Task",
+"💰 You earned ₦6,000 from Lucky Box Reward",
+
+"💰 You earned ₦1,500 from Daily Task",
+"💰 You earned ₦2,700 from Engagement Bonus",
+"💰 You earned ₦4,300 from Content Creation",
+"💰 You earned ₦3,100 from WhatsApp Status",
+"💰 You earned ₦2,600 from Quiz Completion",
+
+"💰 You earned ₦7,000 from Referral System",
+"💰 You earned ₦1,900 from AI Tools",
+"💰 You earned ₦2,400 from Video Watch",
+"💰 You earned ₦3,600 from Platform Activity",
+"💰 You earned ₦5,200 from Bonus Reward",
+
+"💰 You earned ₦1,100 from Login Reward",
+"💰 You earned ₦2,200 from Daily Mission",
+"💰 You earned ₦3,300 from Task Completion",
+"💰 You earned ₦4,400 from Quiz Reward",
+"💰 You earned ₦5,500 from Engagement",
+
+"💰 You earned ₦2,800 from Social Sharing",
+"💰 You earned ₦3,900 from AI Creation",
+"💰 You earned ₦6,100 from Referral Bonus",
+"💰 You earned ₦1,600 from Watch Reward",
+"💰 You earned ₦2,300 from Activity Bonus",
+
+"💰 You earned ₦4,800 from Weekly Challenge",
+"💰 You earned ₦3,700 from Daily Quiz",
+"💰 You earned ₦2,900 from AI Tool Use",
+"💰 You earned ₦5,900 from Platform Bonus",
+"💰 You earned ₦1,300 from Quick Task",
+
+"💰 You earned ₦2,100 from Content View",
+"💰 You earned ₦3,400 from Engagement Task",
+"💰 You earned ₦4,900 from Referral Activity",
+"💰 You earned ₦6,300 from Lucky Draw",
+"💰 You earned ₦2,000 from Video Task",
+
+"💰 You earned ₦1,700 from Daily Login",
+"💰 You earned ₦3,000 from Quiz Win",
+"💰 You earned ₦4,200 from Task Bonus",
+"💰 You earned ₦5,800 from AI System",
+"💰 You earned ₦2,600 from Platform Reward",
+
+"💰 You earned ₦3,500 from Engagement Bonus",
+"💰 You earned ₦4,700 from Referral Income",
+"💰 You earned ₦6,500 from Weekly Reward",
+"💰 You earned ₦2,900 from AI Task",
+"💰 You earned ₦5,100 from System Bonus"
+];
+
+/* ===== POPUP FUNCTION ===== */
+function showPopup(){
+
+const msg = earnings[Math.floor(Math.random()*earnings.length)];
+
+document.getElementById("msg").innerText = msg;
+
+document.getElementById("time").innerText =
+(Math.floor(Math.random()*30)+1) + " minutes ago";
+
+const box = document.getElementById("popup");
+box.style.display = "block";
+
+/* SOUND PLAY */
+sound.currentTime = 0;
+sound.play().catch(()=>{});
+
+setTimeout(()=>{
+box.style.display = "none";
+},5000);
+}
+
+/* AUTO RUN */
+setTimeout(showPopup,4000);
+setInterval(showPopup,8000);
+
+  </script>
