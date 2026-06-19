@@ -17,104 +17,140 @@ font-family:'Poppins',sans-serif;
 
 body{
 background:#0a0014;
-padding:20px;
 color:white;
+padding:20px;
 }
 
 .container{
-max-width:700px;
+max-width:750px;
 margin:auto;
 background:#120022;
-padding:35px;
-border-radius:20px;
-border:1px solid rgba(138,43,226,.25);
+padding:30px;
+border-radius:18px;
+border:1px solid rgba(138,43,226,.3);
 }
 
 .logo{
 text-align:center;
-font-size:32px;
+font-size:28px;
 font-weight:800;
 color:#8a2be2;
+margin-bottom:10px;
+}
+
+.top-text{
+text-align:center;
+margin-bottom:25px;
+}
+
+.top-text h2{
+color:#8a2be2;
+font-size:24px;
+margin-bottom:10px;
+}
+
+.top-text p{
+color:#ccc;
+line-height:1.6;
+font-size:14px;
+}
+
+.notice{
+background:#1a0a2e;
+padding:15px;
+border-radius:12px;
 margin-bottom:20px;
+color:#ccc;
+font-size:13px;
 }
 
 input, select{
 width:100%;
-padding:15px;
-margin-bottom:15px;
+padding:14px;
+margin-bottom:12px;
 border:none;
 border-radius:10px;
-background:#1d1d1d;
+background:#1a0a2e;
 color:white;
-font-size:15px;
+outline:none;
 }
 
 .plan-box{
-background:#1a0a2e;
 padding:20px;
 border-radius:15px;
 margin-bottom:15px;
-border:2px solid transparent;
 cursor:pointer;
+border:1px solid rgba(138,43,226,.4);
+background:#1a0a2e;
 transition:0.3s;
 }
 
 .plan-box:hover{
-border-color:#8a2be2;
+transform:scale(1.02);
 }
 
-.plan-box.active{
-border-color:#8a2be2;
-box-shadow:0 0 20px rgba(138,43,226,.4);
+.plan-box.locked{
+border:2px solid #8a2be2;
+background:#24003f;
 }
 
 .plan-title{
-font-weight:700;
 color:#8a2be2;
-margin-bottom:8px;
-}
-
-.price{
-font-size:20px;
 font-weight:700;
 margin-bottom:10px;
 }
 
-.lock-note{
-margin-top:20px;
-padding:15px;
-border-radius:12px;
-background:linear-gradient(135deg,#1a0a2e,#0a0014);
-border:1px solid rgba(138,43,226,.3);
-color:#ccc;
-font-size:13px;
-line-height:1.6;
+.plan-price{
+font-size:22px;
+font-weight:800;
+margin-top:10px;
+color:#fff;
 }
 
-.lock-note span{
+.unlock{
+background:#1a0a2e;
+padding:15px;
+border-radius:12px;
+margin-top:15px;
+border:1px solid rgba(138,43,226,.2);
+}
+
+.unlock h3{
 color:#8a2be2;
-font-weight:700;
+margin-bottom:10px;
+}
+
+.unlock ul{
+padding-left:18px;
+line-height:1.8;
+color:#ccc;
+font-size:13px;
 }
 
 button{
 width:100%;
-padding:16px;
+padding:15px;
 border:none;
 border-radius:50px;
 background:#8a2be2;
 color:white;
 font-weight:700;
-font-size:16px;
+font-size:15px;
 cursor:pointer;
-margin-top:10px;
+margin-top:15px;
 }
 
-.login-link{
+button:disabled{
+background:#444;
+cursor:not-allowed;
+}
+
+.login{
 text-align:center;
-margin-top:20px;
+margin-top:15px;
 }
 
-.login-link a{
+.login a{
 color:#8a2be2;
 text-decoration:none;
 }
@@ -127,15 +163,21 @@ text-decoration:none;
 
 <div class="logo">💜 VELORA REGISTRATION</div>
 
+<div class="top-text">
+<h2>Join 10,000+ creators earning on Velora</h2>
+<p>Create your account today and begin your onboarding process.</p>
+<p>Please provide accurate information. Your details will be used for verification and support.</p>
+</div>
+
 <form onsubmit="registerUser(event)">
 
 <input type="text" id="fullname" placeholder="Full Name" required>
 <input type="text" id="username" placeholder="Username" required>
-<input type="email" placeholder="Email Address" required>
+<input type="email" placeholder="Email" required>
 <input type="tel" placeholder="Phone Number" required>
 
-<select required>
-<option>Select Country</option>
+<select id="country" required>
+<option value="">Select Country</option>
 <option>Nigeria</option>
 <option>Ghana</option>
 <option>Kenya</option>
@@ -146,77 +188,96 @@ text-decoration:none;
 </select>
 
 <input type="password" placeholder="Password" required>
+<input type="password" placeholder="Confirm Password" required>
 
 <!-- PLANS -->
-<div class="plan-box" onclick="selectPlan('PLATINUM', 8000, 4)">
+<div class="plan-box" onclick="selectPlan('PLATINUM')">
 <div class="plan-title">💜 PLATINUM PLAN</div>
-<div class="price">₦9,000 ($4.50)</div>
-<p>Instant bonus ₦8,000 ($4.00)</p>
+<div>₦9,000 ($4.50)</div>
+<div class="unlock">
+<h3>🎁 WHAT YOU UNLOCK</h3>
+<ul>
+<li>₦8,000 ($4.00) instant bonus</li>
+<li>₦7,200 ($3.60) referral bonus</li>
+<li>AI & quiz earning system</li>
+<li>Up to ₦20,000 ($10.00) YouTube earnings</li>
+<li>Full dashboard access</li>
+</ul>
+</div>
 </div>
 
-<div class="plan-box" onclick="selectPlan('GOLD', 12000, 6)">
+<div class="plan-box" onclick="selectPlan('GOLD')">
 <div class="plan-title">🔥 GOLD PLAN</div>
-<div class="price">₦14,500 ($7.25)</div>
-<p>Instant bonus ₦12,000 ($6.00)</p>
+<div>₦14,500 ($7.25)</div>
+<div class="unlock">
+<h3>🎁 WHAT YOU UNLOCK</h3>
+<ul>
+<li>₦12,000 ($6.00) instant bonus</li>
+<li>₦12,500 ($6.25) referral bonus</li>
+<li>Higher AI earning limits</li>
+<li>Up to ₦40,000 ($20.00) YouTube earnings</li>
+<li>Premium support access</li>
+</ul>
+</div>
 </div>
 
-<!-- LOCK MESSAGE -->
-<div class="lock-note">
-<span>NOTE:</span> Once you select a plan and continue, your plan becomes locked and cannot be changed.  
-This ensures secure activation and proper bonus allocation inside your dashboard system.
-</div>
+<button id="btn" type="submit" disabled>
+SELECT A PLAN TO CONTINUE
+</button>
 
-<button type="submit">CREATE ACCOUNT</button>
-
-</form>
-
-<div class="login-link">
+<div class="login">
 Already have an account? <a href="login.html">Login</a>
 </div>
+
+</form>
 
 </div>
 
 <script>
-let selectedPlanData = {};
-let locked = false;
 
-function selectPlan(plan, naira, dollar){
+let selectedPlan = "";
 
-if(locked) return;
+function selectPlan(plan){
+selectedPlan = plan;
 
-selectedPlanData = {
-plan: plan,
-nairaBonus: naira,
-dollarBonus: dollar
-};
-
-document.querySelectorAll(".plan-box").forEach(box=>{
-box.classList.remove("active");
+document.querySelectorAll(".plan-box").forEach(el=>{
+el.classList.remove("locked");
 });
 
-event.target.closest(".plan-box").classList.add("active");
+event.currentTarget.classList.add("locked");
+
+document.getElementById("btn").disabled = false;
+document.getElementById("btn").innerText =
+"CONTINUE WITH " + plan;
 }
 
 function registerUser(e){
 e.preventDefault();
 
-if(!selectedPlanData.plan){
+if(!selectedPlan){
 alert("Please select a plan");
 return;
 }
 
-locked = true;
+const name = document.getElementById("fullname").value;
+const username = document.getElementById("username").value;
 
-localStorage.setItem("veloraUser", document.getElementById("fullname").value);
-localStorage.setItem("veloraUsername", document.getElementById("username").value);
+localStorage.setItem("velora_name", name);
+localStorage.setItem("velora_username", username);
+localStorage.setItem("velora_plan", selectedPlan);
 
-localStorage.setItem("veloraPlan", selectedPlanData.plan);
-localStorage.setItem("veloraBonusNaira", selectedPlanData.nairaBonus);
-localStorage.setItem("veloraBonusDollar", selectedPlanData.dollarBonus);
+// BONUS SYSTEM
+if(selectedPlan === "PLATINUM"){
+localStorage.setItem("velora_bonus", "8000 NGN ($4.00)");
+}
+if(selectedPlan === "GOLD"){
+localStorage.setItem("velora_bonus", "12000 NGN ($6.00)");
+}
 
 window.location.href = "dashboard.html";
 }
+
 </script>
 
 </body>
-  </html>
+</html>
