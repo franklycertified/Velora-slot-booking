@@ -278,6 +278,25 @@ window.location.href = "dashboard.html";
 }
 
 </script>
+<script>
+function registerUser(event){
+event.preventDefault();
 
+// get inputs
+const fullName = document.getElementById("fullname").value;
+const username = document.getElementById("username").value;
+const email = document.querySelector("input[type='email']").value;
+const phone = document.querySelector("input[type='tel']").value;
+const plan = document.querySelector("select").value;
+
+// save data
+localStorage.setItem("veloraUser", fullName);
+localStorage.setItem("veloraUsername", username);
+localStorage.setItem("veloraPlan", plan);
+
+// redirect
+window.location.href = "dashboard.html";
+}
+</script>
 </body>
 </html>
