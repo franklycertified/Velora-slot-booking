@@ -1,1 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>VELORA AI ACADEMY</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0a0014;
+color:white;
+overflow-x:hidden;
+}
+
+:root{
+--purple:#8a2be2;
+--card:#1a0a2e;
+}
+
+/* HERO */
+.hero{
+min-height:100vh;
+padding:30px 20px;
+background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.9)),
+url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1400');
+background-size:cover;
+background-position:center;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.logo{
+font-size:42px;
+font-weight:800;
+color:var(--purple);
+}
+
+.logo span{
+display:block;
+font-size:14px;
+color:#ccc;
+letter-spacing:2px;
+}
+
+.hero h1{
+font-size:48px;
+margin:20px 0;
+}
+
+.hero p{
+max-width:950px;
+color:#ccc;
+line-height:1.9;
+font-size:16px;
+}
+
+.btns{
+display:flex;
+gap:15px;
+margin-top:25px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 30px;
+border-radius:40px;
+font-weight:700;
+text-decoration:none;
+}
+
+.btn-primary{background:var(--purple);color:white;}
+.btn-secondary{border:2px solid var(--purple);color:var(--purple);}
+
+/* STATS */
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+padding:60px 20px;
+max-width:1200px;
+margin:auto;
+}
+
+.stat{
+background:#160027;
+padding:25px;
+border-radius:18px;
+text-align:center;
+border:1px solid rgba(138,43,226,.15);
+}
+
+.stat h2{
+color:var(--purple);
+font-size:30px;
+}
+
+/* SECTIONS */
+.section{
+padding:90px 20px;
+}
+
+.title{
+text-align:center;
+font-size:38px;
+margin-bottom:35px;
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:var(--card);
+padding:25px;
+border-radius:18px;
+border:1px solid rgba(138,43,226,.2);
+}
+
+.card h3{
+color:var(--purple);
+margin-bottom:10px;
+font-size:18px;
+}
+
+.card p{
+color:#ccc;
+line-height:1.9;
+font-size:14px;
+}
+
+/* FLOATING POPUP */
+.live-popup{
+position:fixed;
+left:20px;
+bottom:20px;
+width:320px;
+background:linear-gradient(135deg,#1a0a2e,#120022);
+border:1px solid rgba(138,43,226,.4);
+border-radius:18px;
+padding:15px;
+z-index:9999;
+display:none;
+animation:slideUp .5s ease;
+}
+
+.live-title{color:var(--purple);font-weight:700;font-size:13px;}
+.live-time{color:#aaa;font-size:12px;margin-top:5px;}
+
+@keyframes slideUp{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+footer{
+text-align:center;
+padding:40px;
+border-top:1px solid rgba(138,43,226,.2);
+color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<div class="logo">💜 VELORA <span>AI ACADEMY</span></div>
+
+<h1>Learn AI. Create AI. Earn from AI.</h1>
+
+<p>
+VELORA AI ACADEMY is a complete AI-powered ecosystem designed to help users learn modern artificial intelligence skills, create professional digital content, and earn income through multiple integrated systems.
+From AI video creation to quizzes, referrals, social engagement, and reward-based tasks — everything is built to help users grow financially and creatively.
+</p>
+
+<div class="btns">
+<a href="register.html" class="btn btn-primary">CREATE ACCOUNT</a>
+<a href="login.html" class="btn btn-secondary">LOGIN</a>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+<div class="stat"><h2>10,000+</h2><p>Active Users</p></div>
+<div class="stat"><h2>5,000+</h2><p>AI Videos Created</p></div>
+<div class="stat"><h2>2,500+</h2><p>Activated Accounts</p></div>
+<div class="stat"><h2>60+</h2><p>Countries</p></div>
+<div class="stat"><h2>24/7</h2><p>Support Access</p></div>
+</section>
+
+<!-- WHY VELORA -->
+<section class="section">
+<h2 class="title">Why Choose VELORA</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🚀 Complete AI Ecosystem</h3>
+<p>VELORA is not just one tool — it is a full ecosystem combining learning, earning, content creation, and monetization in one platform.</p>
+</div>
+
+<div class="card">
+<h3>💰 Multiple Income Streams</h3>
+<p>Users can earn through quizzes, AI videos, WhatsApp sharing, referrals, news reading, fan battles, and more — giving multiple ways to generate income daily.</p>
+</div>
+
+<div class="card">
+<h3>📱 Beginner Friendly</h3>
+<p>Even without technical skills, users can start earning. Every feature is designed with simple steps and easy navigation.</p>
+</div>
+
+<div class="card">
+<h3>🔒 Secure & Reliable</h3>
+<p>Your data, earnings, and account activity are protected with a secure system designed for trust and transparency.</p>
+</div>
+
+</div>
+</section>
+
+<!-- FEATURES (DETAILED) -->
+<section class="section">
+<h2 class="title">Platform Features</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🎥 AI Video Creation</h3>
+<p>Create professional AI-generated videos without showing your face. These videos can be used for TikTok, YouTube, marketing, or sold to other users for profit.</p>
+</div>
+
+<div class="card">
+<h3>⚽ Football Quiz System</h3>
+<p>Answer football-related questions and earn rewards per correct answer. Users can earn between ₦1,500 and ₦8,000 depending on performance and activity level.</p>
+</div>
+
+<div class="card">
+<h3>📰 News Reward System</h3>
+<p>Read daily curated news articles from different regions and earn rewards up to ₦7,000 daily based on engagement and consistency.</p>
+</div>
+
+<div class="card">
+<h3>💳 Loan Access System</h3>
+<p>Eligible users can apply for business support funding directly inside VELORA to help grow small businesses and digital ventures.</p>
+</div>
+
+<div class="card">
+<h3>📱 WhatsApp Reward System</h3>
+<p>Users earn by sharing AI-generated content on WhatsApp status and engaging with promotional materials.</p>
+</div>
+
+<div class="card">
+<h3>📦 AI Lucky Box System</h3>
+<p>A gamified reward system where users open mystery boxes and receive random cash rewards up to ₦20,000 instantly.</p>
+</div>
+
+<div class="card">
+<h3>▶️ YouTube Monetization System</h3>
+<p>Users can create AI content and grow YouTube channels while earning through traffic, engagement, and monetization support tools.</p>
+</div>
+
+<div class="card">
+<h3>⚽ Fan Battle Zone</h3>
+<p>Football fans vote for their favorite clubs in competitions and earn weekly rewards based on participation and winning teams.</p>
+</div>
+
+<div class="card">
+<h3>💸 Opinion Reward System</h3>
+<p>Users watch AI-generated videos, rate them, and provide feedback in exchange for daily rewards and engagement bonuses.</p>
+</div>
+
+<div class="card">
+<h3>🎙️ Voice Vault</h3>
+<p>Users can upload and share voice content, storytelling, and opinions to earn engagement-based rewards.</p>
+</div>
+
+</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+<h2 class="title">How It Works</h2>
+
+<div class="grid">
+
+<div class="card"><h3>1. Register</h3><p>Create your account on VELORA platform.</p></div>
+<div class="card"><h3>2. Login</h3><p>Access your personal dashboard securely.</p></div>
+<div class="card"><h3>3. Activate Account</h3><p>Complete activation to unlock earning features (not free).</p></div>
+<div class="card"><h3>4. Learn AI Skills</h3><p>Start with simple 10-minute AI lessons.</p></div>
+<div class="card"><h3>5. Choose Earnings Path</h3><p>Select from quizzes, videos, WhatsApp or news rewards.</p></div>
+<div class="card"><h3>6. Complete Tasks</h3><p>Perform daily activities and earn rewards.</p></div>
+<div class="card"><h3>7. Withdraw Earnings</h3><p>Transfer your earnings directly to your bank account.</p></div>
+
+</div>
+</section>
+
+<!-- EARNING PLANS (FULL DETAILED) -->
+<section class="section">
+<h2 class="title">Earning Plans</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>💎 PLATINUM PLAN – ₦9,000</h3>
+<p>
+Includes instant ₦8,000 cashback, referral earnings of ₦7,200 per user, AI rewards up to ₦5,000, YouTube earning opportunities up to ₦20,000, and access to quizzes, WhatsApp tasks, and daily withdrawals.
+</p>
+</div>
+
+<div class="card">
+<h3>👑 GOLD PLAN – ₦14,500</h3>
+<p>
+Includes ₦12,000 cashback, ₦12,500 referral rewards, AI bonuses up to ₦10,000, YouTube earnings up to ₦40,000, Snapchat rewards, spillover bonuses, and higher earning limits across all systems.
+</p>
+</div>
+
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+<h2 class="title">What People Say</h2>
+
+<div class="grid">
+
+<div class="card"><h3>Chinedu A.</h3><p>VELORA gave me multiple income streams I never expected.</p></div>
+<div class="card"><h3>Amina B.</h3><p>The football quiz alone helps me earn daily rewards.</p></div>
+<div class="card"><h3>David O.</h3><p>AI tools are simple and powerful to use.</p></div>
+<div class="card"><h3>Grace N.</h3><p>News system keeps me updated while I earn.</p></div>
+<div class="card"><h3>Emmanuel T.</h3><p>Support is fast and very helpful.</p></div>
+<div class="card"><h3>Esther A.</h3><p>The platform feels modern and trustworthy.</p></div>
+
+</div>
+</section>
+
+<!-- FAQ (EXPANDED VERSION - COPY ONLY THIS SECTION) -->
+<section class="section">
+<h2 class="title">Frequently Asked Questions</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>What is VELORA AI ACADEMY?</h3>
+<p>
+VELORA AI ACADEMY is a digital AI learning and earning platform where users can learn AI video creation, complete tasks, participate in reward systems, and earn income through multiple features such as quizzes, referrals, WhatsApp sharing, and content engagement.
+</p>
+</div>
+
+<div class="card">
+<h3>Is VELORA a learning or earning platform?</h3>
+<p>
+VELORA is both. It is designed as a hybrid ecosystem where users first learn AI skills through simple lessons and then apply those skills to earn through different earning modules integrated into the platform.
+</p>
+</div>
+
+<div class="card">
+<h3>Is registration free?</h3>
+<p>
+Yes, creating an account on VELORA is free. However, to unlock full earning features, users are required to activate their account through one of the available plans. Activation gives access to all earning systems and rewards.
+</p>
+</div>
+
+<div class="card">
+<h3>How do I activate my account?</h3>
+<p>
+After registering and logging in, you will be guided to the activation page where you can choose a plan (Platinum or Gold). Once payment is completed, your account is upgraded and all earning features become active.
+</p>
+</div>
+
+<div class="card">
+<h3>How do I earn on VELORA?</h3>
+<p>
+You earn by completing different activities such as answering football quiz questions, watching and rating AI videos, sharing content on WhatsApp, reading news updates, creating AI videos, referring new users, and participating in platform engagement systems.
+</p>
+</div>
+
+<div class="card">
+<h3>How do withdrawals work?</h3>
+<p>
+Withdrawals are processed directly to your registered bank account after reaching the minimum withdrawal threshold. Processing is fast and depends on your activity level and account status.
+</p>
+</div>
+
+<div class="card">
+<h3>Is VELORA available worldwide?</h3>
+<p>
+Yes. VELORA is a global platform available to users from multiple countries. The system is designed to support international users with digital earning opportunities regardless of location.
+</p>
+</div>
+
+<div class="card">
+<h3>Do I need experience to use VELORA?</h3>
+<p>
+No experience is required. The platform is beginner-friendly, and all AI learning modules are designed in simple steps so anyone can start earning even without technical knowledge.
+</p>
+</div>
+
+<div class="card">
+<h3>Is VELORA safe and secure?</h3>
+<p>
+Yes. VELORA uses a secure system to protect user data, earnings, and transactions. All user activities are tracked within a controlled environment to ensure transparency and safety.
+</p>
+</div>
+
+<div class="card">
+<h3>Can I use my phone?</h3>
+<p>
+Yes. VELORA works perfectly on Android phones, iPhones, tablets, and computers. The platform is fully mobile-optimized for smooth access anywhere.
+</p>
+</div>
+
+<div class="card">
+<h3>What happens after activation?</h3>
+<p>
+Once activated, you gain full access to all earning modules including AI tools, quizzes, WhatsApp rewards, YouTube systems, news earnings, and referral bonuses. You can immediately start completing tasks and earning.
+</p>
+</div>
+
+</div>
+</section>
+
+<!-- FLOATING POPUP -->
+<div class="live-popup" id="livePopup">
+<div class="live-title">💜 Live Earnings</div>
+<div id="popupMessage"></div>
+<div class="live-time" id="popupTime"></div>
+</div>
+
+<script>
+const earnings=[
+"Ade earned ₦50,000 from VELORA",
+"Chioma earned ₦25,000 from Quiz",
+"David earned ₦35,000 from News",
+"Mercy earned ₦18,000 from AI Box"
+];
+
+function showEarning(){
+const msg=earnings[Math.floor(Math.random()*earnings.length)];
+document.getElementById("popupMessage").innerHTML=msg;
+document.getElementById("popupTime").innerHTML=
+(Math.floor(Math.random()*30)+1)+" minutes ago";
+
+document.getElementById("livePopup").style.display="block";
+setTimeout(()=>{document.getElementById("livePopup").style.display="none";},5000);
+}
+
+setTimeout(showEarning,3000);
+setInterval(showEarning,9000);
+</script>
+
+<!-- CTA -->
+<section class="section">
+<h2 class="title">Ready to Join VELORA?</h2>
+
+<div class="grid">
+<div class="card">
+<h3>Start Your Journey Today</h3>
+<p>Create your account and start earning through AI-powered opportunities.</p>
+
+<div class="btns">
+<a href="register.html" class="btn btn-primary">CREATE ACCOUNT</a>
+<a href="https://wa.me/2348161380755" class="btn btn-secondary">WHATSAPP SUPPORT</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+© 2026 VELORA AI ACADEMY. All Rights Reserved.
+</footer>
+
+</body>
+  </html>
