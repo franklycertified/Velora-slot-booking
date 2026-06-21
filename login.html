@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VELORA LOGIN</title>
+<title>VELORA Login</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -12,89 +12,98 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:Poppins,sans-serif;
 }
 
 body{
-background:#0a0014;
+background:radial-gradient(circle at top,#1a0033,#0a0014 60%,#000);
 color:white;
 padding:20px;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .container{
-max-width:450px;
-margin:auto;
-background:#160027;
-padding:35px;
+width:100%;
+max-width:420px;
+background:rgba(18,0,34,0.9);
+padding:28px;
 border-radius:18px;
-border:1px solid rgba(138,43,226,.3);
+border:1px solid rgba(138,43,226,.25);
 box-shadow:0 0 25px rgba(138,43,226,.15);
+backdrop-filter:blur(8px);
+text-align:center;
 }
 
 .logo{
-text-align:center;
 font-size:30px;
 font-weight:800;
-color:#8a2be2;
-margin-bottom:10px;
+color:#a855f7;
+margin-bottom:8px;
 }
 
 h2{
-text-align:center;
-margin-bottom:10px;
+font-size:20px;
+margin-bottom:8px;
 }
 
-p{
-text-align:center;
-color:#ccc;
-margin-bottom:20px;
-font-size:14px;
+.subtitle{
+font-size:13px;
+color:#cfcfcf;
 line-height:1.6;
+margin-bottom:18px;
 }
 
 input{
 width:100%;
-padding:15px;
-margin-bottom:15px;
+padding:14px;
+margin-bottom:10px;
 border:none;
-border-radius:10px;
-background:#1d1d1d;
+border-radius:12px;
+background:#1a0a2e;
 color:white;
 outline:none;
+transition:0.2s;
+}
+
+input:focus{
+border:1px solid #8a2be2;
+box-shadow:0 0 8px rgba(138,43,226,.3);
 }
 
 button{
 width:100%;
 padding:15px;
 border:none;
-border-radius:40px;
-background:#8a2be2;
+border-radius:30px;
+background:linear-gradient(135deg,#8a2be2,#a855f7);
 color:white;
 font-weight:700;
 cursor:pointer;
-font-size:16px;
+margin-top:10px;
+transition:0.2s;
 }
 
 button:hover{
-opacity:0.9;
+transform:scale(1.02);
+opacity:0.95;
 }
 
-.note{
-margin-top:15px;
-text-align:center;
-font-size:13px;
+/* bottom note */
+.footer-note{
+margin-top:18px;
+padding-top:14px;
+border-top:1px solid rgba(255,255,255,0.08);
+font-size:12px;
 color:#aaa;
+line-height:1.6;
 }
 
-.plan-badge{
-margin-top:15px;
-padding:10px;
-border-radius:10px;
-background:#120022;
-border:1px solid rgba(138,43,226,.3);
-text-align:center;
-font-size:14px;
-color:#ccc;
+.footer-note span{
+color:#a855f7;
+font-weight:600;
 }
 </style>
 </head>
@@ -107,53 +116,45 @@ color:#ccc;
 
 <h2>Welcome Back</h2>
 
-<p>Login to continue your earning journey on VELORA AI ecosystem.</p>
-
-<input type="text" id="username" placeholder="Username or Full Name">
-<input type="password" id="password" placeholder="Password">
-
-<div class="plan-badge" id="planInfo">
-Your plan will appear here after login
+<div class="subtitle">
+Login to continue your earning journey on VELORA AI ecosystem.
 </div>
+
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
 
 <button onclick="loginUser()">LOGIN</button>
 
-<div class="note">
+<div class="footer-note">
+<span>Your plan will appear here after login</span><br>
 Don’t have an account? Register first to activate your plan.
 </div>
 
 </div>
 
 <script>
+
 function loginUser(){
 
 const username = document.getElementById("username").value;
 const password = document.getElementById("password").value;
 
-// simple demo check (you can improve later)
-const savedUser = localStorage.getItem("glamourUser");
-const savedPlan = localStorage.getItem("veloraPlan");
+const savedUser = localStorage.getItem("velora_username");
+const savedPass = localStorage.getItem("velora_password");
 
 if(!username || !password){
 alert("Please fill all fields");
 return;
 }
 
-if(username !== savedUser){
-alert("User not found. Please register first.");
+if(username !== savedUser || password !== savedPass){
+alert("Invalid login details");
 return;
 }
 
-// show plan
-document.getElementById("planInfo").innerText =
-"Active Plan: " + (savedPlan || "No plan found");
-
-// redirect to dashboard
-setTimeout(()=>{
 window.location.href = "dashboard.html";
-},1500);
-
 }
+
 </script>
 
 </body>
