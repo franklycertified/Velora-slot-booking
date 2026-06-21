@@ -12,7 +12,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:Poppins,sans-serif;
 }
 
 body{
@@ -22,52 +22,31 @@ padding:20px;
 }
 
 .container{
-max-width:750px;
+max-width:850px;
 margin:auto;
 background:#120022;
-padding:30px;
-border-radius:18px;
-border:1px solid rgba(138,43,226,.3);
+padding:25px;
+border-radius:15px;
 }
 
-.logo{
+h2{
 text-align:center;
-font-size:28px;
-font-weight:800;
 color:#8a2be2;
 margin-bottom:10px;
 }
 
-.top-text{
+.subtext{
 text-align:center;
-margin-bottom:25px;
-}
-
-.top-text h2{
-color:#8a2be2;
-font-size:24px;
-margin-bottom:10px;
-}
-
-.top-text p{
 color:#ccc;
+margin-bottom:20px;
 line-height:1.6;
 font-size:14px;
 }
 
-.notice{
-background:#1a0a2e;
-padding:15px;
-border-radius:12px;
-margin-bottom:20px;
-color:#ccc;
-font-size:13px;
-}
-
-input, select{
+input,select{
 width:100%;
 padding:14px;
-margin-bottom:12px;
+margin-bottom:10px;
 border:none;
 border-radius:10px;
 background:#1a0a2e;
@@ -75,69 +54,69 @@ color:white;
 outline:none;
 }
 
-.plan-box{
-padding:20px;
+/* PLAN CARD */
+.plan{
+border:1px solid #8a2be2;
 border-radius:15px;
-margin-bottom:15px;
-cursor:pointer;
-border:1px solid rgba(138,43,226,.4);
+padding:20px;
+margin-bottom:18px;
 background:#1a0a2e;
-transition:0.3s;
+cursor:pointer;
 }
 
-.plan-box:hover{
-transform:scale(1.02);
-}
-
-.plan-box.locked{
-border:2px solid #8a2be2;
-background:#24003f;
+.plan.active{
+background:#2a0050;
+border:2px solid #b36bff;
 }
 
 .plan-title{
-color:#8a2be2;
+font-size:20px;
 font-weight:700;
-margin-bottom:10px;
+color:#8a2be2;
+margin-bottom:5px;
 }
 
 .plan-price{
-font-size:22px;
-font-weight:800;
-margin-top:10px;
-color:#fff;
-}
-
-.unlock{
-background:#1a0a2e;
-padding:15px;
-border-radius:12px;
-margin-top:15px;
-border:1px solid rgba(138,43,226,.2);
-}
-
-.unlock h3{
-color:#8a2be2;
+font-size:16px;
 margin-bottom:10px;
+color:#ccc;
 }
 
-.unlock ul{
-padding-left:18px;
-line-height:1.8;
-color:#ccc;
+.section-title{
+margin-top:10px;
+font-weight:700;
+color:#fff;
+font-size:14px;
+}
+
+.list{
+margin-left:15px;
+margin-top:8px;
+line-height:1.7;
+color:#ddd;
 font-size:13px;
+}
+
+.badge{
+display:inline-block;
+padding:5px 10px;
+border-radius:20px;
+background:#2a0050;
+color:#b36bff;
+font-size:12px;
+margin-bottom:10px;
 }
 
 button{
 width:100%;
 padding:15px;
 border:none;
-border-radius:50px;
+border-radius:30px;
 background:#8a2be2;
 color:white;
 font-weight:700;
-font-size:15px;
 cursor:pointer;
-margin-top:15px;
+margin-top:10px;
 }
 
 button:disabled{
@@ -145,12 +124,13 @@ background:#444;
 cursor:not-allowed;
 }
 
-.login{
+.login-link{
 text-align:center;
 margin-top:15px;
+color:#aaa;
 }
 
-.login a{
+.login-link a{
 color:#8a2be2;
 text-decoration:none;
 }
@@ -161,20 +141,19 @@ text-decoration:none;
 
 <div class="container">
 
-<div class="logo">💜 VELORA REGISTRATION</div>
+<h2>💜 VELORA REGISTRATION</h2>
 
-<div class="top-text">
-<h2>Join 10,000+ creators earning on Velora</h2>
-<p>Create your account today and begin your onboarding process.</p>
-<p>Please provide accurate information. Your details will be used for verification and support.</p>
-</div>
+<p class="subtext">
+Create your account today and begin your onboarding process.<br><br>
+Please provide accurate information. Your details will be used for verification and support.
+</p>
 
 <form onsubmit="registerUser(event)">
 
 <input type="text" id="fullname" placeholder="Full Name" required>
 <input type="text" id="username" placeholder="Username" required>
-<input type="email" placeholder="Email" required>
-<input type="tel" placeholder="Phone Number" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="tel" id="phone" placeholder="Phone Number" required>
 
 <select id="country" required>
 <option value="">Select Country</option>
@@ -183,49 +162,59 @@ text-decoration:none;
 <option>Kenya</option>
 <option>South Africa</option>
 <option>Uganda</option>
+<option>Tanzania</option>
 <option>Cameroon</option>
+<option>United States</option>
+<option>United Kingdom</option>
+<option>India</option>
 <option>Other</option>
 </select>
 
-<input type="password" placeholder="Password" required>
-<input type="password" placeholder="Confirm Password" required>
+<input type="password" id="password" placeholder="Password" required>
 
-<!-- PLANS -->
-<div class="plan-box" onclick="selectPlan('PLATINUM', this)">
+<h3 style="color:#8a2be2;margin:15px 0;">Choose Your Plan</h3>
+
+<!-- PLATINUM -->
+<div class="plan" onclick="selectPlan('PLATINUM',this)">
+
+<div class="badge">MOST POPULAR</div>
+
 <div class="plan-title">💜 PLATINUM PLAN</div>
-<div>₦9,000 ($4.50)</div>
-<div class="unlock">
-<h3>🎁 WHAT YOU UNLOCK</h3>
-<ul>
-<li>₦8,000 ($4.00) instant bonus</li>
-<li>₦7,200 ($3.60) referral bonus</li>
-<li>AI & quiz earning system</li>
-<li>Up to ₦20,000 ($10.00) YouTube earnings</li>
-<li>Full dashboard access</li>
-</ul>
-</div>
+<div class="plan-price">₦9,000 ($4.50)</div>
+
+<div class="section-title">🎁 WHAT YOU UNLOCK</div>
+<div class="list">
+✔ ₦8,000 instant bonus<br>
+✔ ₦7,200 referral bonus per user<br>
+✔ AI & Quiz earning system<br>
+✔ Up to ₦20,000 YouTube earnings<br>
+✔ Full dashboard access
 </div>
 
-<div class="plan-box" onclick="selectPlan('GOLD', this)">
+</div>
+
+<!-- GOLD -->
+<div class="plan" onclick="selectPlan('GOLD',this)">
+
+<div class="badge">PREMIUM</div>
+
 <div class="plan-title">🔥 GOLD PLAN</div>
-<div>₦14,500 ($7.25)</div>
-<div class="unlock">
-<h3>🎁 WHAT YOU UNLOCK</h3>
-<ul>
-<li>₦12,000 ($6.00) instant bonus</li>
-<li>₦12,500 ($6.25) referral bonus</li>
-<li>Higher AI earning limits</li>
-<li>Up to ₦40,000 ($20.00) YouTube earnings</li>
-<li>Premium support access</li>
-</ul>
-</div>
+<div class="plan-price">₦14,500 ($7.25)</div>
+
+<div class="section-title">🎁 WHAT YOU UNLOCK</div>
+<div class="list">
+✔ ₦12,000 instant bonus<br>
+✔ ₦12,500 referral bonus per user<br>
+✔ Advanced AI earning system<br>
+✔ Up to ₦40,000 YouTube earnings<br>
+✔ Premium support access
 </div>
 
-<button id="btn" type="submit" disabled>
-SELECT A PLAN TO CONTINUE
-</button>
+</div>
 
-<div class="login">
+<button id="btn" disabled>SELECT A PLAN TO CONTINUE</button>
+
+<div class="login-link">
 Already have an account? <a href="login.html">Login</a>
 </div>
 
@@ -237,19 +226,20 @@ Already have an account? <a href="login.html">Login</a>
 
 let selectedPlan = "";
 
-function selectPlan(plan, element){
+function selectPlan(plan, el){
+
 selectedPlan = plan;
 
-document.querySelectorAll(".plan-box").forEach(el=>{
-el.classList.remove("locked");
+document.querySelectorAll(".plan").forEach(p=>{
+p.classList.remove("active");
 });
 
-element.classList.add("locked");
+el.classList.add("active");
 
 document.getElementById("btn").disabled = false;
-document.getElementById("btn").innerText =
-"CONTINUE WITH " + plan;
+document.getElementById("btn").innerText = "REGISTER NOW";
 }
+
 function registerUser(e){
 e.preventDefault();
 
@@ -260,28 +250,32 @@ return;
 
 const name = document.getElementById("fullname").value;
 const username = document.getElementById("username").value;
+const email = document.getElementById("email").value;
+const phone = document.getElementById("phone").value;
+const country = document.getElementById("country").value;
+const password = document.getElementById("password").value;
 
-// 👇 ADD THIS HERE
-const email = document.querySelector("input[type='email']").value;
-const phone = document.querySelector("input[type='tel']").value;
-
-// SAVE ALL DATA
 localStorage.setItem("velora_name", name);
 localStorage.setItem("velora_username", username);
 localStorage.setItem("velora_email", email);
 localStorage.setItem("velora_phone", phone);
+localStorage.setItem("velora_country", country);
+localStorage.setItem("velora_password", password);
 localStorage.setItem("velora_plan", selectedPlan);
 
-// BONUS SYSTEM
 if(selectedPlan === "PLATINUM"){
-localStorage.setItem("velora_bonus", "8000 NGN ($4.00)");
-}
-if(selectedPlan === "GOLD"){
-localStorage.setItem("velora_bonus", "12000 NGN ($6.00)");
+localStorage.setItem("velora_bonus","₦8,000");
 }
 
-window.location.href = "dashboard.html";
-  }
+if(selectedPlan === "GOLD"){
+localStorage.setItem("velora_bonus","₦12,000");
+}
+
+alert("Registration successful!");
+
+window.location.href = "login.html";
+}
+
 </script>
 
 </body>
